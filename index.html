@@ -12,15 +12,6 @@
   <body>
     <div id="payment-form"></div>
     <script>
-      function postMessageToRN(data) {
-        console.log("Message to RN:", data);
-        try {
-          window.ReactNativeWebView.postMessage(JSON.stringify(data));
-        } catch (e) {
-          console.error("error writing to RN, error:", e);
-        }
-      }
-
       const params = Object.fromEntries(
         new URLSearchParams(window.location.search).entries()
       );
@@ -29,12 +20,11 @@
         confirmation_token: params.token,
         return_url: "https://pelevin-d-y.github.io/shtefan-kassa/pay_complete",
         error_callback: function (error) {
-          postMessageToRN({ result: "error", error: error });
+          window.location.href =
+            "https://pelevin-d-y.github.io/shtefan-kassa/pay_error";
         },
       });
-      checkout.render("payment-form").then(() => {
-        postMessageToRN({ result: "loaded" });
-      });
+      checkout.render("payment-form");
     </script>
   </body>
 </html>

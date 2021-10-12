@@ -27,7 +27,7 @@
 
       const checkout = new window.YooMoneyCheckoutWidget({
         confirmation_token: params.token,
-        return_url: "/pay_complete",
+        return_url: "/shtefan-kassa/pay_complete",
         error_callback: function (error) {
           postMessageToRN({ result: "error", error: error });
         },
